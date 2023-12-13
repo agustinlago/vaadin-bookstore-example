@@ -4,8 +4,8 @@ WORKDIR /deployments
 
 COPY . .
 USER root
-RUN mvn install -DskipTests
-RUN chmod -R 777 /deployments
+RUN mvn install -DskipTests -Pproduction
+RUN chown -R default /deployments
 USER default
 
-ENTRYPOINT [ "mvn", "jetty:run" , "-Pproduction" ]
+ENTRYPOINT [ "mvn", "jetty:run" ]
